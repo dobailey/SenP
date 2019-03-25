@@ -37,29 +37,15 @@ public class CharacterSprite {
     }
 
     public void update() {
-
-/*
-            x += xVelocity;
-            y += yVelocity;*/
-
-            if (x > screenWidth - image.getWidth()) {
-                x = screenWidth - image.getWidth();
-            }
-            if (x < 0) {
-                x = 0;
-            }
-            /*
-            if ((y > screenHeight - image.getHeight()) || (y < 0)) {
-                yVelocity = yVelocity*-1;
-            }
-*/
+       if (x > screenWidth - image.getWidth()) {
+           x = screenWidth - image.getWidth();
+       }
+       if (x < 0) {
+           x = 0;
+       }
     }
 
     public static Bitmap GetImg(){
         return image;
     }
-
-
 }
-
-

@@ -1,6 +1,5 @@
 package com.dbailey.sp_spacespacego;
 
-
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
@@ -8,30 +7,25 @@ public class MainThread extends Thread {
     private GameView gameView;
     private SurfaceHolder surfaceHolder;
     private boolean running;
-    public static Canvas canvas;
+    private static Canvas canvas;
     private int targetFPS = 30;
     private double averageFPS;
 
 
     public MainThread(SurfaceHolder surfaceHolder, GameView gameView) {
-
         super();
         this.surfaceHolder = surfaceHolder;
         this.gameView = gameView;
-
     }
 
     @Override
-    public void run()
-    {
-
+    public void run() {
         long startTime;
         long timeMillis;
         long waitTime;
         long totalTime = 0;
         int frameCount =0;
         long targetTime = 1000/targetFPS;
-
 
         while(running) {
             startTime = System.nanoTime();
@@ -72,7 +66,6 @@ public class MainThread extends Thread {
                 System.out.println(averageFPS);
             }
         }
-
     }
 
     public void setRunning(boolean isRunning) {

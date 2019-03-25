@@ -16,13 +16,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public GameView(Context context) {
         super(context);
-
         getHolder().addCallback(this);
-
         thread = new MainThread(getHolder(), this);
-
         setFocusable(true);
-
     }
 
     @Override
@@ -31,8 +27,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent e)
-    {
+    public boolean onTouchEvent(MotionEvent e) {
         float x = e.getX();
         float y = e.getY();
 
@@ -41,17 +36,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
                 float dx = x - previousX;
                 float dy = y - previousY;
-/*
-                // reverse direction of rotation above the mid-line
-                if (y > getHeight() / 2) {
-                    dx = dx * -1 ;
-                }
 
-                // reverse direction of rotation to left of the mid-line
-                if (x < getWidth() / 2) {
-                    dy = dy * -1 ;
-                }
-*/
                 characterSprite.Move(dx, dy);
         }
 
@@ -59,7 +44,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         previousY = y;
         return true;
     }
-
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
@@ -72,7 +56,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         thread.setRunning(true);
         thread.start();
-
     }
 
     @Override
@@ -99,9 +82,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     @Override
-    public void draw(Canvas canvas)
-    {
-
+    public void draw(Canvas canvas) {
         super.draw(canvas);
         if(canvas!=null) {
             characterSprite.draw(canvas);
@@ -112,12 +93,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    public static void deleteObs(ObstacleSprite obs) {
+        obs = null;
+    }
 
+    public void createObs(ObstacleSprite obs) {
+        obs = new ObstacleSprite(BitmapFactory.decodeResource(getResources(),R.drawable.obs1), 100, 0);
+    }
 }
-
-
-
-
-
-
-

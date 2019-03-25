@@ -7,8 +7,8 @@ import android.graphics.Canvas;
 public class ObstacleSprite {
 
     private Bitmap image;
-    public int x, y;
-    private int cnt, cnt1, cnt2 = 0;
+    private int x, y;
+    private int cnt = 0;
     private int xVelocity = 10;
     private double yVelocity = 9;
     private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -27,43 +27,54 @@ public class ObstacleSprite {
 
     public void update() {
 
-       /*x += xVelocity;*/
        y += yVelocity;
-       /*if ((x > screenWidth - image.getWidth()) || (x < 0)) {
-           xVelocity = xVelocity*-1;
-       }*/
-       if (CharacterSprite.GetCurY() > 0) { // if obs will be in the same area as ship (to increase efficiency)
-           if ((y >= screenHeight - (CharacterSprite.GetImg().getHeight() * 3) - (image.getHeight()))) {
-               if (y <= screenHeight - (CharacterSprite.GetImg().getHeight() * 2)) {
+
+       // if obs will be in same x zone
+       if ((x >= CharacterSprite.GetCurX() - image.getWidth() && (x <= (CharacterSprite.GetCurX() + CharacterSprite.GetImg().getWidth())))) {
+           // if obs will be in same y zone
+           if ((y >= screenHeight - (CharacterSprite.GetImg().getHeight() * 3) - (image.getHeight())) && (y <= screenHeight - (CharacterSprite.GetImg().getHeight() * 2))) {
                    HitDet();
-               }
            }
-       }
+       } // greatly increased efficiency and eliminated lag
 
        /* WHEN OBSTACLES REACHES BOTTOM OF SCREEN */
        if (y > screenHeight - image.getHeight()) {
            /*yVelocity = yVelocity*-1;*/
 
-           /* CASE STATEMENT FOR MORE VARIABLE SPEED INCREASE??? */
+           /* CASE STATEMENT FOR MORE VARIABLE SPEED INCREASE???
+           *  DELETE OBS AND CREATE NEW??? */
 
-           y = 0;
+           switch (cnt){
+               case 6 : // cnt reaches 6
+                   // do something
+                   cnt++;
+                   break;
+
+               default :
+                   // do something
+                   break;
+           }
+
+
+           y = 0;  // moves obstacle to top of screen to begin falling again
            cnt++;
            if (cnt >= 6) {
                yVelocity += .4;
                cnt = 0;
            }
        }
-
     }
 
-
-    public void HitDet() {
+    private void HitDet() {
         /* TEST HIT DETECTION */
         if (CollisionDetect.CollisionDetected(image, CharacterSprite.GetImg(), x, y, CharacterSprite.GetCurX(), CharacterSprite.GetCurY())){
             yVelocity = 0;
+            // DO SOMETHING WHEN USER HITS OBSTACLE
+            // BRING UP DEATH SCREEN
         }
     }
 
+    private void increaseSpeed() {
+        yVelocity += 1;
+    }
 }
-
-

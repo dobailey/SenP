@@ -1,17 +1,11 @@
 package com.dbailey.sp_spacespacego;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 
 public class CollisionDetect {
 
     private static Bitmap image1, image2;
     private static float x1, y1, x2, y2;
-    private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
-
-    public CollisionDetect(Bitmap bmp1, Bitmap ship, float X1, float Y1, float X2, float Y2){
-        CollisionDetected(bmp1, ship, X1, Y1, X2, Y2);
-    }
 
     public static boolean CollisionDetected (Bitmap bmp1, Bitmap ship, float X1, float Y1, float X2, float Y2) {
         image1 = bmp1;
@@ -50,12 +44,10 @@ public class CollisionDetect {
                         return true;
                     }
                 } catch (Exception e) {
-
+                    System.err.println("Failed to check pixels!");
                 }
             }
         }
-
         return false;
     }
-
 }
