@@ -26,7 +26,7 @@ public class CollisionDetect {
                 xend   = (int) Math.min(width1, width2),
                 yend   = (int) Math.min(height1, height2);
 
-        // intersection rect
+        // intersection rectangle
         int toty = Math.abs(yend - ystart);
         int totx = Math.abs(xend - xstart);
 
@@ -40,7 +40,7 @@ public class CollisionDetect {
                 try {
                     if (((image1.getPixel(nx,ny) & 0xFF000000) != 0x00) &&
                             ((image2.getPixel(nx1,ny1) & 0xFF000000) != 0x00)) {
-                        // collide!!
+                        // Collission!
                         return true;
                     }
                 } catch (Exception e) {

@@ -1,28 +1,36 @@
 package com.dbailey.sp_spacespacego;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
+
+import static com.dbailey.sp_spacespacego.GameView.contextX;
+
 
 public class ObstacleSprite {
 
     private Bitmap image;
     private int x, y;
     private int cnt = 0;
-    private int xVelocity = 10;
-    private double yVelocity = 9;
+    private double xVelocity = 0;
+    private double yVelocity;
     private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-    public ObstacleSprite (Bitmap bmp, int lr, int ud) {
+    public ObstacleSprite (Bitmap bmp, int lr, int ud, double spd) {
         image = bmp;
         x = lr;
         y = ud;
+        yVelocity = spd;
     }
 
     public void draw(Canvas canvas) {
         canvas.drawBitmap(image, x, y, null);
-
     }
 
     public void update() {
@@ -70,6 +78,7 @@ public class ObstacleSprite {
         if (CollisionDetect.CollisionDetected(image, CharacterSprite.GetImg(), x, y, CharacterSprite.GetCurX(), CharacterSprite.GetCurY())){
             yVelocity = 0;
             // DO SOMETHING WHEN USER HITS OBSTACLE
+
             // BRING UP DEATH SCREEN
         }
     }
@@ -77,4 +86,6 @@ public class ObstacleSprite {
     private void increaseSpeed() {
         yVelocity += 1;
     }
+
+
 }

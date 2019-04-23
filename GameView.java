@@ -13,9 +13,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private ObstacleSprite obstacle1, obstacle2, obstacle3, obstacle4;
     private float previousX;
     private float previousY;
+    public static Context contextX;
 
     public GameView(Context context) {
         super(context);
+        contextX = context;
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
         setFocusable(true);
@@ -48,10 +50,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         characterSprite = new CharacterSprite(BitmapFactory.decodeResource(getResources(),R.drawable.ship));
-        obstacle1 = new ObstacleSprite(BitmapFactory.decodeResource(getResources(),R.drawable.obs1), 100, 0);
-        obstacle2 = new ObstacleSprite(BitmapFactory.decodeResource(getResources(),R.drawable.obs2), 425, 200);
-        obstacle3 = new ObstacleSprite(BitmapFactory.decodeResource(getResources(),R.drawable.obs3), 575, 100);
-        obstacle4 = new ObstacleSprite(BitmapFactory.decodeResource(getResources(),R.drawable.obs4), 250, 400);
+        obstacle1 = new ObstacleSprite(BitmapFactory.decodeResource(getResources(),R.drawable.obs1), 100, 0, 9.0);
+        obstacle2 = new ObstacleSprite(BitmapFactory.decodeResource(getResources(),R.drawable.obs2), 425, 0, 12.0);
+        obstacle3 = new ObstacleSprite(BitmapFactory.decodeResource(getResources(),R.drawable.obs3), 575, 0, 9.0);
+        obstacle4 = new ObstacleSprite(BitmapFactory.decodeResource(getResources(),R.drawable.obs4), 250, 0, 8.0);
 
 
         thread.setRunning(true);
@@ -98,6 +100,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void createObs(ObstacleSprite obs) {
-        obs = new ObstacleSprite(BitmapFactory.decodeResource(getResources(),R.drawable.obs1), 100, 0);
+        obs = new ObstacleSprite(BitmapFactory.decodeResource(getResources(),R.drawable.obs1), 100, 0, 10.0);
     }
 }
